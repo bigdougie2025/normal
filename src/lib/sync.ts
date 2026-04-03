@@ -63,6 +63,7 @@ async function syncInspection(id: string): Promise<void> {
       vehicle_year: inspection.vehicle.year,
       vehicle_color: inspection.vehicle.colour,
       vehicle_fuel_type: inspection.vehicle.fuelType,
+      vehicle_transmission_type: inspection.vehicle.transmissionType,
       mileage: inspection.mileage,
       agreed_purchase_price: inspection.agreedPurchasePrice,
       final_agreed_price: inspection.finalAgreedPrice,

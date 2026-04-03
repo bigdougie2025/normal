@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { ChevronDown, Info } from 'lucide-react';
 import { GradingButtons } from './GradingButtons';
 import { PhotoCapture } from './PhotoCapture';
 import { VoiceNoteButton } from './VoiceNoteButton';
@@ -196,14 +196,6 @@ export function ItemRow({
           <ChevronDown size={12} />
           Photo required for this item
         </p>
-      )}
-      {!showDetails && !requiredPhotos && item.grade === 'pass' && (
-        <button
-          onClick={() => setShowHint(false)}
-          className="text-xs font-body text-muted mt-1 flex items-center gap-1 hover:text-primary"
-        >
-          <ChevronUp size={12} />
-        </button>
       )}
     </div>
   );

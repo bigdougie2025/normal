@@ -21,6 +21,7 @@ export function Card({ children, className = '', onClick, padding = 'md' }: Card
     <div
       className={`bg-white rounded-2xl border border-border shadow-sm ${paddingClasses[padding]} ${interactive} ${className}`}
       onClick={onClick}
+      onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } } : undefined}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >

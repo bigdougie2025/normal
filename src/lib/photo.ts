@@ -123,9 +123,12 @@ export async function compressPhoto(file: Blob): Promise<Blob> {
   const ctx = canvas.getContext('2d')!;
   ctx.drawImage(img, 0, 0, width, height);
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     canvas.toBlob(
-      (blob) => resolve(blob!),
+      (blob) => {
+        if (blob) resolve(blob);
+        else reject(new Error('Failed to compress photo'));
+      },
       'image/jpeg',
       JPEG_QUALITY,
     );

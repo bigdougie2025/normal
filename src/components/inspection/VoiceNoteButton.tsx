@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Mic, MicOff } from 'lucide-react';
+import { Mic } from 'lucide-react';
 import { isVoiceSupported, startVoiceRecognition, stopVoiceRecognition } from '../../lib/voice';
 
 interface VoiceNoteButtonProps {
@@ -56,7 +56,7 @@ export function VoiceNoteButton({ onTranscript, onInterim }: VoiceNoteButtonProp
         `}
         aria-label={recording ? 'Stop recording' : 'Start voice note'}
       >
-        {recording ? <MicOff size={18} /> : <Mic size={18} />}
+        <Mic size={18} />
       </button>
       {recording && (
         <span className="text-xs font-body text-fail font-medium">Recording...</span>
