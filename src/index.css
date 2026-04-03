@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary palette */
+  --color-primary: #181818;
+  --color-accent: #E8FF00;
+  --color-surface: #F4F4F0;
+
+  /* Status colours */
+  --color-pass: #1DB87A;
+  --color-advisory: #F5A623;
+  --color-fail: #E03434;
+
+  /* Supporting palette */
+  --color-dark: #2C2C2C;
+  --color-muted: #6B6B6B;
+  --color-border: #E8E8E4;
+
+  /* Fonts */
+  --font-headline: 'Barlow Condensed', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Tap target */
+  --spacing-tap: 56px;
+}
+
+/* Base styles */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+/* Input styles for mobile */
+input, textarea, select {
+  font-size: 16px;
+}
