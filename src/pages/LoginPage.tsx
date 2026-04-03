@@ -13,12 +13,12 @@ export function LoginPage() {
   const navigate = useNavigate();
 
   // For demo: skip auth
-  const handleDemoLogin = () => {
+  const handleDemoLogin = (role: 'inspector' | 'admin') => {
     useAuthStore.getState().setUser({
-      id: 'demo-user',
-      email: 'inspector@recc.co.uk',
-      fullName: 'Demo Inspector',
-      role: 'inspector',
+      id: role === 'admin' ? 'demo-admin' : 'demo-user',
+      email: role === 'admin' ? 'manager@recc.co.uk' : 'inspector@recc.co.uk',
+      fullName: role === 'admin' ? 'Demo Manager' : 'Demo Inspector',
+      role,
     });
     navigate('/');
   };
@@ -97,9 +97,14 @@ export function LoginPage() {
                 </div>
               </div>
 
-              <Button variant="ghost" fullWidth onClick={handleDemoLogin} className="!border-white/20 !text-white/60 hover:!text-white">
-                Continue as Demo Inspector
-              </Button>
+              <div className="space-y-2">
+                <Button variant="ghost" fullWidth onClick={() => handleDemoLogin('inspector')} className="!border-white/20 !text-white/60 hover:!text-white">
+                  Continue as Demo Inspector
+                </Button>
+                <Button variant="ghost" fullWidth onClick={() => handleDemoLogin('admin')} className="!border-accent/30 !text-accent/70 hover:!text-accent">
+                  Continue as Demo Manager
+                </Button>
+              </div>
             </form>
           )}
         </div>
