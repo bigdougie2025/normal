@@ -11,6 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <title>Auto Inspect Pro</title>
     <script>
+      try {
+        var t = JSON.parse(localStorage.getItem('theme-preference') || '{}');
+        document.documentElement.setAttribute('data-theme', (t.state && t.state.theme) || 'dark');
+      } catch(e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+    </script>
+    <script>
       (function(l) {
         if (l.search[1] === '/' ) {
           var decoded = l.search.slice(1).split('&').map(function(s) {
@@ -22,8 +28,8 @@
         }
       }(window.location))
     </script>
-    <script type="module" crossorigin src="/normal/assets/index-BKkpYsFO.js"></script>
-    <link rel="stylesheet" crossorigin href="/normal/assets/index-IAvvil-c.css">
+    <script type="module" crossorigin src="/normal/assets/index-CxVU5pDX.js"></script>
+    <link rel="stylesheet" crossorigin href="/normal/assets/index-CIPwEqC7.css">
   </head>
   <body class="bg-surface font-body text-primary antialiased">
     <div id="root"></div>
