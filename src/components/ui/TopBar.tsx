@@ -1,6 +1,7 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Sun, Moon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import type { ReactNode } from 'react';
+import { useThemeStore } from '../../stores/themeStore';
 
 interface TopBarProps {
   title: string;
@@ -11,6 +12,7 @@ interface TopBarProps {
 
 export function TopBar({ title, showBack = false, onBack, rightAction }: TopBarProps) {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useThemeStore();
 
   const handleBack = () => {
     if (onBack) onBack();
@@ -32,6 +34,16 @@ export function TopBar({ title, showBack = false, onBack, rightAction }: TopBarP
         <h1 className="flex-1 font-headline text-base font-black uppercase tracking-tight text-white truncate">
           {title}
         </h1>
+        <button
+          onClick={toggleTheme}
+          className="flex items-center justify-center w-9 h-9 rounded-xl hover:bg-white/[0.06] active:bg-white/[0.1] transition-colors duration-[150ms]"
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {theme === 'dark'
+            ? <Sun size={16} className="text-white/50" />
+            : <Moon size={16} className="text-white/50" />
+          }
+        </button>
         {rightAction && <div className="flex-shrink-0">{rightAction}</div>}
       </div>
     </header>

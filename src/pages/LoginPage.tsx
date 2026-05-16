@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { useAuthStore } from '../stores/authStore';
+import { useThemeStore } from '../stores/themeStore';
 
 export function LoginPage() {
   const [email, setEmail] = useState('');
@@ -11,6 +13,7 @@ export function LoginPage() {
   const [loading, setLoading] = useState(false);
   const signIn = useAuthStore((s) => s.signInWithMagicLink);
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useThemeStore();
 
   const handleDemoLogin = (role: 'inspector' | 'admin') => {
     useAuthStore.getState().setUser({
@@ -105,10 +108,20 @@ export function LoginPage() {
         </div>
       </div>
 
-      <div className="text-center py-6">
+      <div className="flex items-center justify-center gap-4 py-6">
         <p className="text-xs font-body text-white/15">
           Really Easy Car Credit
         </p>
+        <button
+          onClick={toggleTheme}
+          className="flex items-center justify-center w-8 h-8 rounded-xl hover:bg-white/[0.06] active:bg-white/[0.1] transition-colors duration-[150ms]"
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {theme === 'dark'
+            ? <Sun size={14} className="text-white/25" />
+            : <Moon size={14} className="text-white/25" />
+          }
+        </button>
       </div>
     </div>
   );

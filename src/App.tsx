@@ -3,6 +3,7 @@ import { AppRouter } from './routes';
 import { OfflineBanner } from './components/ui/OfflineBanner';
 import { useUiStore } from './stores/uiStore';
 import { useAuthStore } from './stores/authStore';
+import { useThemeStore } from './stores/themeStore';
 import { startSync } from './lib/sync';
 
 function App() {
@@ -10,6 +11,11 @@ function App() {
   const initialize = useAuthStore((s) => s.initialize);
   const toasts = useUiStore((s) => s.toasts);
   const removeToast = useUiStore((s) => s.removeToast);
+  const theme = useThemeStore((s) => s.theme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     initialize();
