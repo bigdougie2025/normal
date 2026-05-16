@@ -48,10 +48,10 @@ export function VoiceNoteButton({ onTranscript, onInterim }: VoiceNoteButtonProp
       <button
         onClick={toggle}
         className={`
-          flex items-center justify-center w-10 h-10 rounded-full transition-all
+          flex items-center justify-center w-10 h-10 rounded-full transition-all duration-[200ms]
           ${recording
-            ? 'bg-fail text-white animate-pulse'
-            : 'bg-border/50 text-muted hover:bg-border active:scale-95'
+            ? 'bg-fail text-white animate-pulse-glow'
+            : 'bg-white/[0.06] text-muted hover:bg-white/[0.1] active:scale-95'
           }
         `}
         aria-label={recording ? 'Stop recording' : 'Start voice note'}

@@ -105,14 +105,14 @@ export function NewInspectionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-primary">
       <TopBar title="NEW INSPECTION" showBack />
 
-      <div className="p-4 space-y-4 max-w-2xl mx-auto">
+      <div className="p-4 space-y-6 max-w-2xl mx-auto">
         {/* Step 1: VRM Entry */}
         {step === 'vrm' && (
-          <div className="space-y-4">
-            <h2 className="font-headline text-xl font-black uppercase tracking-tight text-primary">
+          <div className="space-y-6">
+            <h2 className="font-headline text-xl font-black uppercase tracking-tight text-white">
               ENTER REGISTRATION
             </h2>
             <div className="flex gap-2">
@@ -140,21 +140,21 @@ export function NewInspectionPage() {
 
         {/* Step 2: Vehicle Details Confirmation */}
         {step === 'details' && vehicle && (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {/* Vehicle info card */}
             <Card padding="lg">
               <div className="text-center mb-4">
-                <p className="font-headline text-3xl font-black uppercase tracking-tight text-primary">
+                <p className="font-headline text-3xl font-black uppercase tracking-tight text-white">
                   {vehicle.vrm}
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3 text-sm font-body">
                 <div>
-                  <span className="text-muted">Make</span>
-                  <p className="font-semibold text-primary">{vehicle.make || 'Unknown'}</p>
+                  <span className="text-white/70">Make</span>
+                  <p className="font-semibold text-white">{vehicle.make || 'Unknown'}</p>
                 </div>
                 <div>
-                  <span className="text-muted">Model</span>
+                  <span className="text-white/70">Model</span>
                   <Input
                     value={vehicle.model}
                     onChange={(e) => setVehicle({ ...vehicle, model: e.target.value })}
@@ -163,16 +163,16 @@ export function NewInspectionPage() {
                   />
                 </div>
                 <div>
-                  <span className="text-muted">Year</span>
-                  <p className="font-semibold text-primary">{vehicle.year || 'Unknown'}</p>
+                  <span className="text-white/70">Year</span>
+                  <p className="font-semibold text-white">{vehicle.year || 'Unknown'}</p>
                 </div>
                 <div>
-                  <span className="text-muted">Colour</span>
-                  <p className="font-semibold text-primary">{vehicle.colour || 'Unknown'}</p>
+                  <span className="text-white/70">Colour</span>
+                  <p className="font-semibold text-white">{vehicle.colour || 'Unknown'}</p>
                 </div>
                 <div>
-                  <span className="text-muted">Engine</span>
-                  <p className="font-semibold text-primary">{vehicle.engineSize || 'Unknown'}</p>
+                  <span className="text-white/70">Engine</span>
+                  <p className="font-semibold text-white">{vehicle.engineSize || 'Unknown'}</p>
                 </div>
               </div>
             </Card>
@@ -180,13 +180,13 @@ export function NewInspectionPage() {
             {/* MOT History card */}
             {motHistory && motHistory.tests.length > 0 && (
               <Card>
-                <h3 className="font-headline text-sm font-black uppercase tracking-tight text-primary mb-3">
+                <h3 className="font-headline text-sm font-black uppercase tracking-tight text-white mb-3">
                   MOT HISTORY
                 </h3>
                 {motHistory.currentExpiryDate && (
                   <p className="text-sm font-body mb-2">
-                    <span className="text-muted">Expires: </span>
-                    <span className="font-semibold text-primary">{motHistory.currentExpiryDate}</span>
+                    <span className="text-white/40">Expires: </span>
+                    <span className="font-semibold text-white">{motHistory.currentExpiryDate}</span>
                   </p>
                 )}
                 {motHistory.tests[0]?.advisories.length > 0 && (
@@ -194,7 +194,7 @@ export function NewInspectionPage() {
                     <p className="text-xs font-body text-advisory font-semibold mb-1">Recent advisories:</p>
                     <ul className="space-y-1">
                       {motHistory.tests[0].advisories.map((adv, i) => (
-                        <li key={i} className="text-xs font-body text-muted flex items-start gap-1.5">
+                        <li key={i} className="text-xs font-body text-white/40 flex items-start gap-1.5">
                           <span className="text-advisory mt-0.5">•</span> {adv}
                         </li>
                       ))}
@@ -202,9 +202,9 @@ export function NewInspectionPage() {
                   </div>
                 )}
                 <div className="mt-3 space-y-1">
-                  <p className="text-xs font-body text-muted font-semibold">Mileage progression:</p>
+                  <p className="text-xs font-body text-white/40 font-semibold">Mileage progression:</p>
                   {motHistory.tests.slice(0, 5).map((test, i) => (
-                    <p key={i} className="text-xs font-body text-muted">
+                    <p key={i} className="text-xs font-body text-white/40">
                       {test.testDate}: {test.odometerValue.toLocaleString()} {test.odometerUnit}
                     </p>
                   ))}
@@ -215,24 +215,24 @@ export function NewInspectionPage() {
             {/* Known Issues card */}
             {aiLoading && (
               <Card>
-                <div className="animate-pulse space-y-2">
-                  <div className="h-4 bg-accent/20 rounded w-1/2" />
-                  <div className="h-3 bg-accent/10 rounded w-3/4" />
-                  <div className="h-3 bg-accent/10 rounded w-2/3" />
+                <div className="space-y-2">
+                  <div className="h-4 skeleton rounded w-1/2" />
+                  <div className="h-3 skeleton rounded w-3/4" />
+                  <div className="h-3 skeleton rounded w-2/3" />
                 </div>
               </Card>
             )}
             {knownIssues && (
               <Card>
-                <h3 className="font-headline text-sm font-black uppercase tracking-tight text-primary mb-3 flex items-center gap-2">
+                <h3 className="font-headline text-sm font-black uppercase tracking-tight text-white mb-3 flex items-center gap-2">
                   <Info size={16} className="text-accent" />
                   KNOWN ISSUES FOR THIS MODEL
                 </h3>
                 <ul className="space-y-2">
                   {knownIssues.map((issue, i) => (
                     <li key={i} className="text-sm font-body">
-                      <span className="font-semibold text-primary">{issue.issue}</span>
-                      <p className="text-xs text-muted mt-0.5">{issue.detail}</p>
+                      <span className="font-semibold text-white">{issue.issue}</span>
+                      <p className="text-xs text-white/40 mt-0.5">{issue.detail}</p>
                     </li>
                   ))}
                 </ul>
@@ -247,26 +247,26 @@ export function NewInspectionPage() {
 
         {/* Step 3: Inspection Configuration */}
         {step === 'config' && (
-          <div className="space-y-4">
-            <h2 className="font-headline text-xl font-black uppercase tracking-tight text-primary">
+          <div className="space-y-6">
+            <h2 className="font-headline text-xl font-black uppercase tracking-tight text-white">
               INSPECTION SETUP
             </h2>
 
             {/* Inspection type */}
             <div>
-              <label className="block text-sm font-body font-medium text-primary mb-2">Inspection type</label>
+              <label className="block text-sm font-body font-medium text-white/70 mb-2">Inspection type</label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   onClick={() => setInspectionType('private_purchase')}
                   className={`min-h-[56px] rounded-xl border-2 font-body font-semibold text-sm p-3 text-left transition-all
-                    ${inspectionType === 'private_purchase' ? 'border-primary bg-primary text-white' : 'border-border text-muted'}`}
+                    ${inspectionType === 'private_purchase' ? 'border-accent bg-accent text-primary' : 'border-white/[0.08] bg-white/[0.04] text-white/40'}`}
                 >
                   Private Purchase Appraisal
                 </button>
                 <button
                   onClick={() => setInspectionType('pdi')}
                   className={`min-h-[56px] rounded-xl border-2 font-body font-semibold text-sm p-3 text-left transition-all
-                    ${inspectionType === 'pdi' ? 'border-primary bg-primary text-white' : 'border-border text-muted'}`}
+                    ${inspectionType === 'pdi' ? 'border-accent bg-accent text-primary' : 'border-white/[0.08] bg-white/[0.04] text-white/40'}`}
                 >
                   Pre Delivery Inspection
                 </button>
@@ -275,14 +275,14 @@ export function NewInspectionPage() {
 
             {/* Fuel type */}
             <div>
-              <label className="block text-sm font-body font-medium text-primary mb-2">Fuel type</label>
+              <label className="block text-sm font-body font-medium text-white/70 mb-2">Fuel type</label>
               <div className="grid grid-cols-4 gap-2">
                 {(['petrol', 'diesel', 'hybrid', 'electric'] as FuelType[]).map((ft) => (
                   <button
                     key={ft}
                     onClick={() => setFuelType(ft)}
                     className={`min-h-[44px] rounded-xl border-2 font-body font-medium text-sm capitalize transition-all
-                      ${fuelType === ft ? 'border-primary bg-primary text-white' : 'border-border text-muted'}`}
+                      ${fuelType === ft ? 'border-accent bg-accent text-primary' : 'border-white/[0.08] bg-white/[0.04] text-white/40'}`}
                   >
                     {ft}
                   </button>
@@ -292,14 +292,14 @@ export function NewInspectionPage() {
 
             {/* Transmission */}
             <div>
-              <label className="block text-sm font-body font-medium text-primary mb-2">Transmission</label>
+              <label className="block text-sm font-body font-medium text-white/70 mb-2">Transmission</label>
               <div className="grid grid-cols-2 gap-2">
                 {(['manual', 'automatic'] as TransmissionType[]).map((tt) => (
                   <button
                     key={tt}
                     onClick={() => setTransmissionType(tt)}
                     className={`min-h-[44px] rounded-xl border-2 font-body font-medium text-sm capitalize transition-all
-                      ${transmissionType === tt ? 'border-primary bg-primary text-white' : 'border-border text-muted'}`}
+                      ${transmissionType === tt ? 'border-accent bg-accent text-primary' : 'border-white/[0.08] bg-white/[0.04] text-white/40'}`}
                   >
                     {tt}
                   </button>

@@ -18,18 +18,18 @@ export function TopBar({ title, showBack = false, onBack, rightAction }: TopBarP
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-primary text-white">
+    <header className="sticky top-0 z-50 bg-primary/80 backdrop-blur-xl border-b border-white/[0.06]">
       <div className="flex items-center h-14 px-4 gap-3">
         {showBack && (
           <button
             onClick={handleBack}
-            className="flex items-center justify-center w-10 h-10 -ml-2 rounded-lg hover:bg-white/10 active:bg-white/20 transition-colors"
+            className="flex items-center justify-center w-10 h-10 -ml-2 rounded-xl hover:bg-white/[0.06] active:bg-white/[0.1] transition-colors duration-[150ms]"
             aria-label="Go back"
           >
-            <ArrowLeft size={22} />
+            <ArrowLeft size={20} className="text-white/70" />
           </button>
         )}
-        <h1 className="flex-1 font-headline text-lg font-black uppercase tracking-tight truncate">
+        <h1 className="flex-1 font-headline text-base font-black uppercase tracking-tight text-white truncate">
           {title}
         </h1>
         {rightAction && <div className="flex-shrink-0">{rightAction}</div>}

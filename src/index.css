@@ -2,19 +2,25 @@
 
 @theme {
   /* Primary palette */
-  --color-primary: #181818;
+  --color-primary: #0a0a0a;
   --color-accent: #E8FF00;
-  --color-surface: #F4F4F0;
+  --color-surface: #141414;
+  --color-surface-light: #F4F4F0;
 
   /* Status colours */
-  --color-pass: #1DB87A;
-  --color-advisory: #F5A623;
-  --color-fail: #E03434;
+  --color-pass: #22c55e;
+  --color-advisory: #f59e0b;
+  --color-fail: #ef4444;
 
   /* Supporting palette */
-  --color-dark: #2C2C2C;
-  --color-muted: #6B6B6B;
-  --color-border: #E8E8E4;
+  --color-dark: #1a1a1a;
+  --color-elevated: #222222;
+  --color-muted: #a1a1a1;
+  --color-muted-strong: #666666;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.16);
+  --color-border-light: #E8E8E4;
+  --color-white: #fafafa;
 
   /* Fonts */
   --font-headline: 'Barlow Condensed', sans-serif;
@@ -22,6 +28,13 @@
 
   /* Tap target */
   --spacing-tap: 56px;
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
 }
 
 /* Base styles */
@@ -31,11 +44,29 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
   padding-bottom: env(safe-area-inset-bottom);
+  background: #0a0a0a;
+  color: #fafafa;
+}
+
+/* Glass card utility */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* Scrollbar styling */
@@ -46,11 +77,40 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
 }
 
 /* Input styles for mobile */
 input, textarea, select {
   font-size: 16px;
+}
+
+/* Slide up animation */
+@keyframes slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-up {
+  animation: slide-up 0.3s var(--ease-spring);
+}
+
+/* Pulse glow for recording */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Skeleton loading */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }

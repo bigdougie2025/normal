@@ -24,25 +24,23 @@ export function BottomSheet({ open, onClose, title, children }: BottomSheetProps
 
   return (
     <div className="fixed inset-0 z-50 flex items-end">
-      {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-primary/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      {/* Sheet */}
-      <div className="relative w-full max-h-[85vh] bg-white rounded-t-2xl overflow-hidden animate-slide-up">
-        <div className="flex items-center justify-between p-4 border-b border-border">
+      <div className="relative w-full max-h-[85vh] bg-dark rounded-t-3xl overflow-hidden animate-slide-up border-t border-white/[0.08]">
+        <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
           {title && (
-            <h3 className="font-headline text-base font-black uppercase tracking-tight text-primary">
+            <h3 className="font-headline text-sm font-black uppercase tracking-tight text-white">
               {title}
             </h3>
           )}
           <button
             onClick={onClose}
-            className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-border/50 transition-colors ml-auto"
+            className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-white/[0.06] transition-colors ml-auto"
             aria-label="Close"
           >
-            <X size={20} />
+            <X size={18} className="text-white/50" />
           </button>
         </div>
         <div className="overflow-y-auto max-h-[calc(85vh-60px)] p-4 pb-safe">

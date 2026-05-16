@@ -34,7 +34,6 @@ export function PhotoCapture({
     setProcessing(true);
 
     try {
-      // Quality check
       const quality = await checkPhotoQuality(file);
       if (!quality.ok) {
         setError(quality.message);
@@ -42,7 +41,6 @@ export function PhotoCapture({
         return;
       }
 
-      // Compress
       const compressed = await compressPhoto(file);
       const thumbnail = await createThumbnail(compressed);
 
@@ -60,16 +58,13 @@ export function PhotoCapture({
         syncStatus: 'pending',
       };
 
-      // Save blob to IndexedDB
       await savePhotoToDb({ ...photo, blob: compressed });
-
       onPhotoAdded(photo);
     } catch (err) {
       setError('Failed to process photo. Please try again.');
       console.error(err);
     } finally {
       setProcessing(false);
-      // Reset input
       if (inputRef.current) inputRef.current.value = '';
     }
   };
@@ -80,37 +75,31 @@ export function PhotoCapture({
         <p className="text-xs font-body text-muted">{prompt}</p>
       )}
 
-      {/* Photo thumbnails */}
       {photos.length > 0 && (
         <div className="flex gap-2 overflow-x-auto pb-1">
           {photos.map((photo) => (
-            <div key={photo.id} className="relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden bg-border/30">
+            <div key={photo.id} className="relative flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden bg-white/[0.04] border border-white/[0.06]">
               {photo.thumbnailDataUrl && (
-                <img
-                  src={photo.thumbnailDataUrl}
-                  alt="Captured"
-                  className="w-full h-full object-cover"
-                />
+                <img src={photo.thumbnailDataUrl} alt="Captured" className="w-full h-full object-cover" />
               )}
               <button
                 onClick={() => onPhotoRemoved(photo.id)}
-                className="absolute top-1 right-1 w-5 h-5 bg-primary/70 rounded-full flex items-center justify-center"
+                className="absolute top-1 right-1 w-5 h-5 bg-black/70 rounded-full flex items-center justify-center backdrop-blur-sm"
                 aria-label="Remove photo"
               >
-                <X size={12} className="text-white" />
+                <X size={10} className="text-white" />
               </button>
             </div>
           ))}
         </div>
       )}
 
-      {/* Capture button */}
       <button
         onClick={() => inputRef.current?.click()}
         disabled={processing}
-        className="flex items-center gap-2 min-h-[44px] px-4 rounded-xl border border-dashed border-border text-muted font-body text-sm hover:bg-border/20 active:scale-95 transition-all disabled:opacity-50"
+        className="flex items-center gap-2 min-h-[44px] px-4 rounded-xl border border-dashed border-white/[0.1] text-muted font-body text-sm hover:bg-white/[0.03] active:scale-[0.98] transition-all duration-[150ms] disabled:opacity-50"
       >
-        <Camera size={18} />
+        <Camera size={16} />
         {processing ? 'Processing...' : 'Take photo'}
       </button>
 
@@ -123,10 +112,9 @@ export function PhotoCapture({
         className="hidden"
       />
 
-      {/* Error */}
       {error && (
         <div className="flex items-start gap-2 p-3 rounded-xl bg-fail/10 border border-fail/20">
-          <AlertCircle size={16} className="text-fail flex-shrink-0 mt-0.5" />
+          <AlertCircle size={14} className="text-fail flex-shrink-0 mt-0.5" />
           <p className="text-sm font-body text-fail">{error}</p>
         </div>
       )}

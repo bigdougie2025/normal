@@ -19,11 +19,11 @@ export function InspectionPage() {
 
   if (loading || !currentInspection) {
     return (
-      <div className="min-h-screen bg-surface">
+      <div className="min-h-screen bg-primary">
         <TopBar title="LOADING..." showBack />
-        <div className="p-4 animate-pulse space-y-4">
+        <div className="p-4 space-y-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-20 bg-border/30 rounded-2xl" />
+            <div key={i} className="h-20 skeleton rounded-2xl" />
           ))}
         </div>
       </div>
@@ -38,23 +38,23 @@ export function InspectionPage() {
   const allGraded = gradedItems === totalItems && totalItems > 0;
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-primary">
       <TopBar
         title={`${currentInspection.vehicle.vrm}`}
         showBack
         onBack={() => navigate('/')}
       />
 
-      <div className="p-4 space-y-4 max-w-2xl mx-auto">
+      <div className="p-4 space-y-6 max-w-2xl mx-auto">
         {/* Vehicle header */}
         <Card padding="lg">
-          <h2 className="font-headline text-2xl font-black uppercase tracking-tight text-primary">
+          <h2 className="font-headline text-2xl font-black uppercase tracking-tight text-white">
             {currentInspection.vehicle.make} {currentInspection.vehicle.model}
           </h2>
-          <p className="text-sm font-body text-muted mt-1">
+          <p className="text-sm font-body text-white/40 mt-1">
             {currentInspection.vehicle.year} · {currentInspection.vehicle.colour} · {currentInspection.mileage?.toLocaleString() || 'N/A'} miles
           </p>
-          <p className="text-xs font-body text-muted mt-1">
+          <p className="text-xs font-body text-white/30 mt-1">
             {currentInspection.type === 'private_purchase' ? 'Private Purchase Appraisal' : 'Pre Delivery Inspection'}
           </p>
         </Card>
@@ -79,13 +79,13 @@ export function InspectionPage() {
           className="flex items-center gap-3"
         >
           <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center flex-shrink-0">
-            <MapPin size={20} className="text-primary" />
+            <MapPin size={20} className="text-white" />
           </div>
           <div className="flex-1">
-            <h3 className="font-headline text-sm font-black uppercase tracking-tight text-primary">
+            <h3 className="font-headline text-sm font-black uppercase tracking-tight text-white">
               BODY DAMAGE DIAGRAM
             </h3>
-            <p className="text-xs font-body text-muted">
+            <p className="text-xs font-body text-white/30">
               {currentInspection.bodyDamageMarkers.length} markers placed
             </p>
           </div>

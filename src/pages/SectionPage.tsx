@@ -32,7 +32,7 @@ export function SectionPage() {
 
   if (!currentInspection || !section || !sectionDef) {
     return (
-      <div className="min-h-screen bg-surface">
+      <div className="min-h-screen bg-primary">
         <TopBar title="LOADING..." showBack />
       </div>
     );
@@ -57,7 +57,7 @@ export function SectionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-primary">
       <TopBar
         title={sectionDef.label}
         showBack
@@ -71,7 +71,7 @@ export function SectionPage() {
 
       <div className="p-4 max-w-2xl mx-auto">
         {/* Item list */}
-        <div className="bg-white rounded-2xl border border-border px-4">
+        <div className="bg-white/[0.03] rounded-2xl border border-white/[0.06] px-4">
           {section.items.map((item) => {
             const def = itemDefs[item.itemKey];
             return (
@@ -100,7 +100,7 @@ export function SectionPage() {
           {sectionIndex > 0 && (
             <button
               onClick={handlePrev}
-              className="flex-1 min-h-[48px] rounded-xl border border-border font-body font-semibold text-sm text-muted hover:text-primary transition-colors"
+              className="flex-1 min-h-[48px] rounded-xl border border-white/[0.08] font-body font-semibold text-sm text-white/40 hover:text-white transition-colors"
             >
               Previous Section
             </button>
@@ -110,7 +110,7 @@ export function SectionPage() {
             className={`flex-1 min-h-[48px] rounded-xl font-body font-semibold text-sm transition-all
               ${gradedCount === section.items.length
                 ? 'bg-accent text-primary active:scale-95'
-                : 'bg-primary text-white active:scale-95'
+                : 'bg-white/[0.08] text-white active:scale-95'
               }`}
           >
             {sectionIndex < totalSections - 1 ? 'Next Section' : 'Back to Overview'}
