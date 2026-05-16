@@ -26,7 +26,7 @@ export function SummaryPage() {
   const inspection = currentInspection;
   if (!inspection) {
     return (
-      <div className="min-h-screen bg-surface">
+      <div className="min-h-screen bg-primary">
         <TopBar title="LOADING..." showBack />
       </div>
     );
@@ -72,16 +72,16 @@ export function SummaryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-primary">
       <TopBar title="INSPECTION SUMMARY" showBack onBack={() => navigate(`/inspection/${id}`)} />
 
-      <div className="p-4 space-y-4 max-w-2xl mx-auto">
+      <div className="p-4 space-y-6 max-w-2xl mx-auto">
         {/* Vehicle */}
         <div className="text-center">
-          <h2 className="font-headline text-3xl font-black uppercase tracking-tight text-primary">
+          <h2 className="font-headline text-3xl font-black uppercase tracking-tight text-white">
             {inspection.vehicle.make} {inspection.vehicle.model}
           </h2>
-          <p className="font-body text-muted text-sm">
+          <p className="font-body text-white/40 text-sm">
             {inspection.vehicle.vrm} · {inspection.vehicle.year} · {inspection.mileage?.toLocaleString()} miles
           </p>
         </div>
@@ -91,19 +91,19 @@ export function SummaryPage() {
           <div className="flex items-center justify-center gap-6">
             <div className="text-center">
               <div className="text-3xl font-headline font-black text-pass">{inspection.passCounts}</div>
-              <div className="text-xs font-body text-muted flex items-center gap-1 justify-center">
+              <div className="text-xs font-body text-white/30 flex items-center gap-1 justify-center">
                 <CheckCircle size={12} className="text-pass" /> Pass
               </div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-headline font-black text-advisory">{inspection.advisoryCounts}</div>
-              <div className="text-xs font-body text-muted flex items-center gap-1 justify-center">
+              <div className="text-xs font-body text-white/30 flex items-center gap-1 justify-center">
                 <AlertTriangle size={12} className="text-advisory" /> Advisory
               </div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-headline font-black text-fail">{inspection.failCounts}</div>
-              <div className="text-xs font-body text-muted flex items-center gap-1 justify-center">
+              <div className="text-xs font-body text-white/30 flex items-center gap-1 justify-center">
                 <XCircle size={12} className="text-fail" /> Fail
               </div>
             </div>
@@ -120,7 +120,7 @@ export function SummaryPage() {
 
         {/* Section breakdown */}
         <Card>
-          <h3 className="font-headline text-sm font-black uppercase tracking-tight text-primary mb-3">
+          <h3 className="font-headline text-sm font-black uppercase tracking-widest text-white/30 mb-3">
             SECTION BREAKDOWN
           </h3>
           <div className="space-y-2">
@@ -130,10 +130,10 @@ export function SummaryPage() {
               return (
                 <div
                   key={section.id}
-                  className="flex items-center justify-between py-2 border-b border-border last:border-b-0 cursor-pointer hover:bg-surface/50 -mx-4 px-4"
+                  className="flex items-center justify-between py-2 border-b border-white/[0.06] last:border-b-0 cursor-pointer hover:bg-white/[0.04] -mx-4 px-4"
                   onClick={() => navigate(`/inspection/${id}/section/${section.sectionKey}`)}
                 >
-                  <span className="text-sm font-body text-primary">{section.sectionKey.replace(/_/g, ' ')}</span>
+                  <span className="text-sm font-body text-white">{section.sectionKey.replace(/_/g, ' ')}</span>
                   <div className="flex gap-2">
                     {sectionFails > 0 && (
                       <span className="text-xs font-body font-semibold text-fail">{sectionFails} fail</span>
@@ -154,7 +154,7 @@ export function SummaryPage() {
         {/* Fault details */}
         {faultItems.length > 0 && (
           <Card>
-            <h3 className="font-headline text-sm font-black uppercase tracking-tight text-primary mb-3">
+            <h3 className="font-headline text-sm font-black uppercase tracking-widest text-white/30 mb-3">
               FAULTS FOUND
             </h3>
             <div className="space-y-3">
@@ -162,8 +162,8 @@ export function SummaryPage() {
                 <div key={item.id} className="flex items-start gap-3">
                   <StatusPill grade={item.grade} size="sm" />
                   <div className="flex-1">
-                    <p className="text-sm font-body font-semibold text-primary">{item.label}</p>
-                    {item.notes && <p className="text-xs font-body text-muted mt-0.5">{item.notes}</p>}
+                    <p className="text-sm font-body font-semibold text-white">{item.label}</p>
+                    {item.notes && <p className="text-xs font-body text-white/40 mt-0.5">{item.notes}</p>}
                   </div>
                 </div>
               ))}
@@ -195,7 +195,7 @@ export function SummaryPage() {
                     <div key={i} className="flex justify-between items-center py-1">
                       <span className="text-sm font-body text-white/80">{est.itemLabel}</span>
                       <span className="text-sm font-body font-semibold text-white">
-                        {'\u00A3'}{est.estimatedCostLow} {'\u2013'} {'\u00A3'}{est.estimatedCostHigh}
+                        {'£'}{est.estimatedCostLow} {'–'} {'£'}{est.estimatedCostHigh}
                       </span>
                     </div>
                   ))}
@@ -203,18 +203,18 @@ export function SummaryPage() {
                 <div className="border-t border-white/20 pt-3 space-y-2">
                   <div className="flex justify-between">
                     <span className="text-sm font-body text-white/60">Agreed price</span>
-                    <span className="text-sm font-body text-white">{'\u00A3'}{inspection.agreedPurchasePrice?.toLocaleString()}</span>
+                    <span className="text-sm font-body text-white">{'£'}{inspection.agreedPurchasePrice?.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm font-body text-white/60">Total repair costs</span>
                     <span className="text-sm font-body text-white">
-                      {'\u00A3'}{inspection.aiRepairSummary.totalCostLow} {'\u2013'} {'\u00A3'}{inspection.aiRepairSummary.totalCostHigh}
+                      {'£'}{inspection.aiRepairSummary.totalCostLow} {'–'} {'£'}{inspection.aiRepairSummary.totalCostHigh}
                     </span>
                   </div>
                   <div className="flex justify-between items-end mt-2 pt-2 border-t border-white/20">
                     <span className="text-sm font-body text-accent font-semibold">Revised offer price</span>
                     <span className="font-headline text-4xl font-black text-accent">
-                      {'\u00A3'}{inspection.aiRepairSummary.revisedOfferPrice.toLocaleString()}
+                      {'£'}{inspection.aiRepairSummary.revisedOfferPrice.toLocaleString()}
                     </span>
                   </div>
                 </div>
@@ -260,8 +260,8 @@ export function SummaryPage() {
               <div className="w-16 h-16 bg-pass/20 rounded-full flex items-center justify-center mx-auto mb-3">
                 <CheckCircle size={28} className="text-pass" />
               </div>
-              <h3 className="font-headline text-xl font-black uppercase text-primary">INSPECTION SUBMITTED</h3>
-              <p className="text-sm font-body text-muted mt-2">
+              <h3 className="font-headline text-xl font-black uppercase text-white">INSPECTION SUBMITTED</h3>
+              <p className="text-sm font-body text-white/40 mt-2">
                 PDF report has been generated. Share the link below with the customer.
               </p>
             </Card>

@@ -14,14 +14,14 @@ export function BodyDiagramPage() {
 
   if (!currentInspection) {
     return (
-      <div className="min-h-screen bg-surface">
+      <div className="min-h-screen bg-primary">
         <TopBar title="LOADING..." showBack />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-primary">
       <TopBar title="BODY DAMAGE DIAGRAM" showBack />
       <div className="p-4 max-w-2xl mx-auto">
         <BodyDiagram

@@ -19,7 +19,7 @@ function App() {
   }, [initialize, initOnlineListener]);
 
   return (
-    <div className="min-h-screen bg-surface font-body text-primary">
+    <div className="min-h-screen bg-primary font-body text-white">
       <OfflineBanner />
       <AppRouter />
 
@@ -29,7 +29,7 @@ function App() {
           <div
             key={toast.id}
             className={`pointer-events-auto px-4 py-3 rounded-xl shadow-lg font-body text-sm text-white
-              ${toast.type === 'success' ? 'bg-pass' : toast.type === 'error' ? 'bg-fail' : 'bg-primary'}`}
+              ${toast.type === 'success' ? 'bg-pass' : toast.type === 'error' ? 'bg-fail' : 'bg-elevated'}`}
             onClick={() => removeToast(toast.id)}
           >
             {toast.message}

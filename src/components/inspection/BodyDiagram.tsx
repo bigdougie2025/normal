@@ -127,15 +127,15 @@ export function BodyDiagram({ inspectionId, markers, onAddMarker, onRemoveMarker
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* View tabs */}
-      <div className="flex gap-1 bg-surface rounded-xl p-1">
+      <div className="flex gap-1 bg-white/[0.04] rounded-xl p-1">
         {VIEWS.map((v) => (
           <button
             key={v.key}
             onClick={() => setActiveView(v.key)}
             className={`flex-1 py-2 px-2 rounded-lg text-xs font-body font-semibold transition-all
-              ${activeView === v.key ? 'bg-primary text-white' : 'text-muted hover:text-primary'}`}
+              ${activeView === v.key ? 'bg-accent text-primary' : 'text-white/40 hover:text-white'}`}
           >
             {v.label}
             {markers.filter((m) => m.view === v.key).length > 0 && (
@@ -148,10 +148,10 @@ export function BodyDiagram({ inspectionId, markers, onAddMarker, onRemoveMarker
       </div>
 
       {/* SVG Diagram */}
-      <div className="relative bg-white rounded-2xl border border-border p-4">
+      <div className="relative bg-white/[0.03] rounded-2xl border border-white/[0.06] p-4">
         <svg
           viewBox="0 0 100 100"
-          className="w-full h-auto text-primary cursor-crosshair"
+          className="w-full h-auto text-white/70 cursor-crosshair"
           onClick={handleSvgClick}
         >
           <VehicleOutline view={activeView} />
@@ -194,7 +194,7 @@ export function BodyDiagram({ inspectionId, markers, onAddMarker, onRemoveMarker
             />
           )}
         </svg>
-        <p className="text-xs text-center text-muted mt-2 font-body">
+        <p className="text-xs text-center text-white/30 mt-2 font-body">
           Tap on the diagram to mark damage
         </p>
       </div>
@@ -203,7 +203,7 @@ export function BodyDiagram({ inspectionId, markers, onAddMarker, onRemoveMarker
       {viewMarkers.length > 0 && (
         <div className="space-y-2">
           {viewMarkers.map((marker, idx) => (
-            <div key={marker.id} className="flex items-center gap-3 p-3 rounded-xl bg-surface">
+            <div key={marker.id} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03]">
               <span
                 className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold"
                 style={{ backgroundColor: severityColor[marker.severity] }}
@@ -211,11 +211,11 @@ export function BodyDiagram({ inspectionId, markers, onAddMarker, onRemoveMarker
                 {idx + 1}
               </span>
               <div className="flex-1 min-w-0">
-                <span className="text-sm font-body font-medium text-primary capitalize">
+                <span className="text-sm font-body font-medium text-white capitalize">
                   {marker.damageType} ({marker.severity})
                 </span>
                 {marker.notes && (
-                  <p className="text-xs font-body text-muted truncate">{marker.notes}</p>
+                  <p className="text-xs font-body text-white/40 truncate">{marker.notes}</p>
                 )}
               </div>
               <button
@@ -237,14 +237,14 @@ export function BodyDiagram({ inspectionId, markers, onAddMarker, onRemoveMarker
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-body font-medium text-primary mb-2">Damage type</label>
+            <label className="block text-sm font-body font-medium text-white/70 mb-2">Damage type</label>
             <div className="grid grid-cols-3 gap-2">
               {DAMAGE_TYPES.map((t) => (
                 <button
                   key={t.key}
                   onClick={() => setMarkerType(t.key)}
                   className={`py-2 px-3 rounded-lg text-sm font-body font-medium border transition-all
-                    ${markerType === t.key ? 'border-primary bg-primary text-white' : 'border-border text-muted hover:text-primary'}`}
+                    ${markerType === t.key ? 'border-accent bg-accent text-primary' : 'border-white/[0.08] bg-white/[0.04] text-white/40 hover:text-white'}`}
                 >
                   {t.label}
                 </button>
@@ -253,14 +253,14 @@ export function BodyDiagram({ inspectionId, markers, onAddMarker, onRemoveMarker
           </div>
 
           <div>
-            <label className="block text-sm font-body font-medium text-primary mb-2">Severity</label>
+            <label className="block text-sm font-body font-medium text-white/70 mb-2">Severity</label>
             <div className="grid grid-cols-3 gap-2">
               {SEVERITY_OPTIONS.map((s) => (
                 <button
                   key={s.key}
                   onClick={() => setMarkerSeverity(s.key)}
                   className={`py-2 px-3 rounded-lg text-sm font-body font-medium border transition-all
-                    ${markerSeverity === s.key ? 'border-primary bg-primary text-white' : 'border-border text-muted hover:text-primary'}`}
+                    ${markerSeverity === s.key ? 'border-accent bg-accent text-primary' : 'border-white/[0.08] bg-white/[0.04] text-white/40 hover:text-white'}`}
                 >
                   {s.label}
                 </button>

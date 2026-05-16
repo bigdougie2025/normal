@@ -51,9 +51,10 @@ export function CustomerViewPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-surface flex items-center justify-center">
-        <div className="animate-pulse text-center">
-          <p className="font-body text-muted">Loading inspection...</p>
+      <div className="min-h-screen bg-primary flex items-center justify-center">
+        <div className="text-center">
+          <div className="h-4 skeleton rounded w-40 mx-auto mb-2" />
+          <p className="font-body text-white/30">Loading inspection...</p>
         </div>
       </div>
     );
@@ -61,10 +62,10 @@ export function CustomerViewPage() {
 
   if (error || !inspection) {
     return (
-      <div className="min-h-screen bg-surface flex items-center justify-center p-6">
+      <div className="min-h-screen bg-primary flex items-center justify-center p-6">
         <div className="text-center">
-          <h1 className="font-headline text-2xl font-black uppercase text-primary">NOT FOUND</h1>
-          <p className="font-body text-muted mt-2">{error}</p>
+          <h1 className="font-headline text-2xl font-black uppercase text-white">NOT FOUND</h1>
+          <p className="font-body text-white/40 mt-2">{error}</p>
         </div>
       </div>
     );
@@ -75,34 +76,34 @@ export function CustomerViewPage() {
     .filter((i) => i.grade === 'advisory' || i.grade === 'fail');
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-primary">
       {/* Header */}
-      <header className="bg-primary text-white px-4 py-4">
+      <header className="bg-primary border-b border-white/[0.06] text-white px-4 py-4">
         <p className="font-headline text-xs font-black uppercase tracking-widest text-accent">AUTO INSPECT PRO</p>
         <h1 className="font-headline text-2xl font-black uppercase tracking-tight mt-1">
           {inspection.vehicle.make} {inspection.vehicle.model}
         </h1>
-        <p className="font-body text-sm text-white/60 mt-1">
+        <p className="font-body text-sm text-white/40 mt-1">
           {inspection.vehicle.vrm} · {inspection.vehicle.year} · {inspection.mileage?.toLocaleString()} miles
         </p>
       </header>
 
-      <div className="p-4 space-y-4 max-w-2xl mx-auto">
+      <div className="p-4 space-y-6 max-w-2xl mx-auto">
         {/* Overall grade */}
         <Card padding="lg" className="text-center">
           <StatusPill grade={inspection.overallGrade} />
           <div className="flex items-center justify-center gap-6 mt-4">
             <div>
               <span className="text-2xl font-headline font-black text-pass">{inspection.passCounts}</span>
-              <p className="text-xs font-body text-muted">Pass</p>
+              <p className="text-xs font-body text-white/30">Pass</p>
             </div>
             <div>
               <span className="text-2xl font-headline font-black text-advisory">{inspection.advisoryCounts}</span>
-              <p className="text-xs font-body text-muted">Advisory</p>
+              <p className="text-xs font-body text-white/30">Advisory</p>
             </div>
             <div>
               <span className="text-2xl font-headline font-black text-fail">{inspection.failCounts}</span>
-              <p className="text-xs font-body text-muted">Fail</p>
+              <p className="text-xs font-body text-white/30">Fail</p>
             </div>
           </div>
         </Card>
@@ -110,13 +111,13 @@ export function CustomerViewPage() {
         {/* Section results */}
         {inspection.sections.map((section) => (
           <Card key={section.id}>
-            <h3 className="font-headline text-xs font-black uppercase tracking-tight text-primary mb-2">
+            <h3 className="font-headline text-xs font-black uppercase tracking-widest text-white/30 mb-2">
               {section.sectionKey.replace(/_/g, ' ')}
             </h3>
             <div className="space-y-1.5">
               {section.items.map((item) => (
                 <div key={item.id} className="flex items-center justify-between py-1">
-                  <span className="text-sm font-body text-primary">{item.label}</span>
+                  <span className="text-sm font-body text-white">{item.label}</span>
                   <StatusPill grade={item.grade} size="sm" />
                 </div>
               ))}
@@ -127,16 +128,16 @@ export function CustomerViewPage() {
         {/* Faults detail */}
         {faultItems.length > 0 && (
           <Card>
-            <h3 className="font-headline text-xs font-black uppercase tracking-tight text-primary mb-3">
+            <h3 className="font-headline text-xs font-black uppercase tracking-widest text-white/30 mb-3">
               ISSUES FOUND
             </h3>
             {faultItems.map((item) => (
-              <div key={item.id} className="py-2 border-b border-border last:border-b-0">
+              <div key={item.id} className="py-2 border-b border-white/[0.06] last:border-b-0">
                 <div className="flex items-center gap-2">
                   <StatusPill grade={item.grade} size="sm" />
-                  <span className="text-sm font-body font-semibold text-primary">{item.label}</span>
+                  <span className="text-sm font-body font-semibold text-white">{item.label}</span>
                 </div>
-                {item.notes && <p className="text-xs font-body text-muted mt-1 ml-[70px]">{item.notes}</p>}
+                {item.notes && <p className="text-xs font-body text-white/40 mt-1 ml-[70px]">{item.notes}</p>}
               </div>
             ))}
           </Card>
@@ -144,10 +145,10 @@ export function CustomerViewPage() {
 
         {/* Footer */}
         <div className="text-center py-6">
-          <p className="text-xs font-body text-muted">
+          <p className="text-xs font-body text-white/30">
             Inspected by {inspection.inspectorName} · Auto Inspect Pro
           </p>
-          <p className="text-xs font-body text-muted">
+          <p className="text-xs font-body text-white/30">
             Really Easy Car Credit
           </p>
         </div>
